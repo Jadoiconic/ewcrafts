@@ -107,14 +107,15 @@ $userId = $_SESSION['userInfo']['id'];
                                     <tr>
                                         <td>N<sup>o</sup></td>
                                         <td>Product Name</td>
-                                        <td>Price</td>
+                                        <td>Amount</td>
                                         <td>Client Name</td>
                                         <td>Email</td>
                                         <td>Phone</td>
-                                        <td>Status</td>
+                                        <td>Delivery</td>
+                                        <td>Payment</td>
                                         <td>Transaction Ref</td>
                                         <td>CreatedAt</td>
-                                        <td>Actions</td>
+                                        <td colspan="2">Actions</td>
                                     </tr>
                                 </thead>
 
@@ -144,6 +145,9 @@ $userId = $_SESSION['userInfo']['id'];
                                             <?php print($row['phone']) ?>
                                         </td>
                                         <td>
+                                            <?php print($row['delivery'] == 1 ? 'Delivered' : 'Not Delivered') ?>
+                                        </td>
+                                        <td>
                                             <?php print($row['status'] == 1 ? 'Success' : 'Failed') ?>
                                         </td>
                                         <td>
@@ -153,8 +157,11 @@ $userId = $_SESSION['userInfo']['id'];
                                             <?php print($row['createdAt']) ?>
                                         </td>
                                         
-                                        <td><a class="btn py-0 btn-danger"
-                                                href="deleteOrder.php?q=<?php print($row[0]) ?>">Delete</a></td>
+                                        <td>
+                                            <a class="btn py-0 btn-primary" href="updateOrderStatus.php?q=<?php print($row[0]) ?>"><?php print($row['delivery'] == 1 ? 'Undo' : 'Do') ?></a></td>
+                                            <td>
+                                                <a class="btn py-0 btn-danger" href="deleteOrder.php?q=<?php print($row[0]) ?>">Delete</a>
+                                            </td>
                                     </tr>
                                     <?php
                                     $n++;
